@@ -47,8 +47,8 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
     
-//    @GetMapping("/generate-password")
-//    public String generatePassword() {
-//        return passwordEncoder.encode("password");
-//    }
+    @PostMapping("/generate-password")
+    public String generatePassword(@RequestBody Map<String, String> body) {
+        return passwordEncoder.encode(body.get("password"));
+    }
 }
