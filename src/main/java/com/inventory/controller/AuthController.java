@@ -48,8 +48,23 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
     
-    @PostMapping("/generate-password")
-    public String generatePassword(@RequestBody Map<String, String> body) {
-        return passwordEncoder.encode(body.get("password"));
-    }
+   @PostMapping("/generate-password")
+public String generatePassword() {
+    String email = "admin@123.com";
+    String password = "password";
+
+    // Delete existing admin if exists
+    userRepository.findByEmail(email)
+        .ifPresent(userRepository::delete);
+
+    // Create new admin
+    User admin = new User();
+    admin.setEmail(email);
+    admin.setPassword(passwordEncoder.encode(password));
+    admin.setName("Admin");
+    admin.setRole("ADMIN");
+    userRepository.save(admin);
+
+    return "Admin created! Email: " + email + " Password: password";
+}
 }
