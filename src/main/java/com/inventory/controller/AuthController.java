@@ -48,8 +48,8 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
     
-    //@PostMapping("/generate-password")
-    //public String generatePassword(@RequestBody Map<String, String> body) {
-      //  return passwordEncoder.encode(body.get("password"));
-    //}
+    @PostMapping("/generate-password")
+    public String generatePassword(@RequestBody Map<String, String> body) {
+        return passwordEncoder.encode(body.get("password"));
+    }
 }
